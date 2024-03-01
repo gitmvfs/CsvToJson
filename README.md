@@ -34,3 +34,6 @@ Beneficios:
 - Utilize o formulário de testes dentro de /test
 - Faça upload do arquivo de teste.
 - Dentro do console deverá aparecer o resultado do json
+
+
+obs: Os dados são ficticios e servem apenas para ilustrar o exemplo da aplicação
