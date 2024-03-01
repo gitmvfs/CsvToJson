@@ -5,7 +5,7 @@ const dataAtual = require("../utils/dataAtual")
 const storageCSV = multer.diskStorage({
     destination: resolve(__dirname, "../", "upload"), // Define o local onde os arquivos serão salvos
     filename: function(req, file, cb) {
-        const nomeArquivo = "cadastro-alunos-" + dataAtual() + ".csv";
+        const nomeArquivo = "arquivo-upload-" + dataAtual() + ".csv";
         cb(null, nomeArquivo);
     }
 });

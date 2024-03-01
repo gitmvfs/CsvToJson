@@ -9,7 +9,7 @@ router.post('/upload-csv', uploadCSV.single('csvFile'), async (req, res) => {
     }
 
     const jsonResponse = csvToJson.getJsonFromCsv(req.file.path)
-    console.log(jsonResponse[0])
+    console.log(jsonResponse)
     try {
         res.status(200)
             .json({
