@@ -1,26 +1,31 @@
-const csvParser = require("csv-parser")
-const multer = require("multer")
+const router = require("express").Router()
+const uploadCSV = require("../utils/multerStorage")
+const csvToJson = require("convert-csv-to-json")
 const {resolve} = require("path")
 
-
-const storageCSV = multer.diskStorage({
-    destination: resolve (__dirname , "../" , "upload"), // Define o local aonde vai guardar no caso => /diretorioAtual/../upload
-    filename: "cadastro-alunos-" + "horaatual" + ".csv" // Define o nome do arquivo
-
-})
-
-app.post('/upload-csv', storageCSV.single('csvFile'), async (req, res) => {
+router.post('/upload-csv', uploadCSV.single('csvFile'), async (req, res) => {
     if (!req.file) {
         return res.status(400).json({ message: 'No file uploaded' });
     }
 
-    console.log(req.file)
-
+    const jsonResponse = csvToJson.getJsonFromCsv(req.file.path)
+    console.log(jsonResponse[0])
     try {
-        const dataFile = await csvReader(csvFilePath);
-        res.status(200).json({ data: "File uploaded" , dataFile: dataFile});
+        res.status(200)
+            .json({
+                status: "200",
+                msg: "File upload success",
+                dataFile: jsonResponse
+            });
+
     } catch (error) {
         console.error('Error processing CSV:', error);
-        res.status(500).json({ message: 'Internal server error' });
+        res.status(500)
+            .json({
+                status:"500", 
+                msg: 'Internal server error' 
+            });
     }
 });
+
+module.exports = router

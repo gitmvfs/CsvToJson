@@ -1,6 +1,7 @@
 const express = require("express")
 const app = express()
 const cors = require("cors")
+const uploadRoute = require("./routes/uploadRoute")
 
 const serverPort = 3000
 
